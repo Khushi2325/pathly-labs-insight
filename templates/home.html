@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pathly Labs</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Pathly Labs</h1>
+    <p>Clear market insights based on historical price behavior.</p>
+
+    <form action="/search" method="get">
+      <input
+        type="text"
+        name="symbol"
+        placeholder="Enter NSE stock (e.g. TCS, INFY)"
+        required
+      />
+      <button type="submit">Analyze</button>
+    </form>
+
+    <p class="disclaimer">
+      Educational insights only. Not financial advice.
+    </p>
+  </div>
+</body>
+</html>

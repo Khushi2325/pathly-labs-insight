@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ data.symbol }} | Pathly Labs</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        canvas {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <h1>{{ data.symbol }}</h1>
+
+    <p class="summary">
+        This stock is currently showing a
+        <strong>{{ data.structure }}</strong>
+        market structure based on recent price behavior.
+    </p>
+
+    <!-- INFO CARD -->
+    <div class="card">
+        <p><b>Current Price:</b> ₹{{ data.price }}</p>
+        <p><b>RSI:</b> {{ data.rsi }}</p>
+    </div>
+
+    <!-- PRICE + MA CHART -->
+    <h3>Price & Trend</h3>
+    <canvas id="priceChart"></canvas>
+
+    <!-- RSI CHART -->
+    <h3>Momentum (RSI)</h3>
+    <canvas id="rsiChart"></canvas>
+
+    <p class="disclaimer">
+        Educational insights only. Not financial advice.
+    </p>
+
+</div>
+
+<!-- CHART SCRIPT -->
+<script>
+    const labels = {{ data.dates | safe }};
+    const prices = {{ data.prices | safe }};
+    const ma50 = {{ data.ma50 | safe }};
+    const rsi = {{ data.rsi_series | safe }};
+
+    // PRICE + MA CHART
+    new Chart(document.getElementById("priceChart"), {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Price",
+                    data: prices,
+                    borderColor: "#111",
+                    tension: 0.3
+                },
+                {
+                    label: "MA 50",
+                    data: ma50,
+                    borderColor: "#3A6EA5",
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true }
+            }
+        }
+    });
+
+    // RSI CHART
+    new Chart(document.getElementById("rsiChart"), {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "RSI",
+                    data: rsi,
+                    borderColor: "#2F8F83",
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
