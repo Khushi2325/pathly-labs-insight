@@ -2,8 +2,10 @@ from flask import Flask, render_template, request
 from analysis import analyze_stock
 import os
 
-BASE_URL = os.getenv("BASE_URL", "http://localhost:8000")
+# 🔹 Base directory of this file
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# 🔹 Flask app
 app = Flask(
     __name__,
     template_folder=os.path.join(BASE_DIR, "templates"),
