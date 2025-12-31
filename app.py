@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from analysis import analyze_stock
 import os
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+BASE_URL = os.getenv("BASE_URL", "http://localhost:8000")
 
 app = Flask(
     __name__,
